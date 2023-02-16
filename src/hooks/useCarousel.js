@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import images from '../data/meals.json';
+import images from '../data/meals';
 
 function useCarousel(defaultVal = null) {
   const [index, setIndex] = useState(defaultVal);
@@ -12,7 +12,7 @@ function useCarousel(defaultVal = null) {
     return () => clearInterval(intervalId);
   }, []);
 
-  return [index, setIndex];
+  return { index, setIndex };
 }
 
 export default useCarousel;

@@ -1,37 +1,63 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { GrAdd } from 'react-icons/gr';
-import { StyledContainer, StyledWrapper } from '../StyledComponents.js/styles';
+import React, { useState } from 'react';
+import { StyledContainer } from '../StyledComponents.js/styles';
 import Carousel from './carousel';
-import MealsCard from './mealsCard';
-import meals from '../data/meals.json';
-import DialogueBox from './viewModal';
 import useModal from '../hooks/useModal';
-import MealsContext from '../context';
 import MenuBar from './menuBar';
+import CreateBox from './createModal';
+import UpdateBox from './updateModal';
+import ViewBox from './viewModal';
+import meals from '../data/meals';
+
+import useLocalStorage from '../hooks/useLocalStorage';
+import RecipeContext from '../context';
+import RecipeCard from './RecipeCard';
 
 function LandingPage() {
   const [openModal, setOpenModal] = useModal(false);
+  const [openUpdateModal, setOpenUpdateModal] = useModal(false);
+  const [viewIndex, setViewIndex] = useState(null);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [recipe, setRecipe] = useState(meals);
+  const contextVals = {
+    openModal,
+    openUpdateModal,
+    openCreateModal,
+    setOpenUpdateModal,
+    setOpenModal,
+    setOpenCreateModal,
+    recipe,
+    setRecipe,
+    viewIndex,
+    setViewIndex,
+  };
+  useLocalStorage(recipe);
 
   return (
     <div>
-      <MealsContext.Provider value={{ openModal, setOpenModal }}>
+      <RecipeContext.Provider value={contextVals}>
         <MenuBar />
         <Carousel />
         <StyledContainer>
-          <h1>Our Recipes</h1>
+          <h1>Your Recipes</h1>
           <div>
-            <button type="button">
-              <GrAdd size={18} /> Add Recipes
-            </button>
+            {recipe.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setOpenCreateModal((prev) => !prev)}
+              >
+                <GrAdd size={18} /> Add Recipes
+              </button>
+            )}
           </div>
         </StyledContainer>
-        <StyledWrapper>
-          {meals.map(({ scr, id }) => {
-            return <MealsCard key={id} image={scr} />;
-          })}
-          {openModal && <DialogueBox />}
-        </StyledWrapper>
-      </MealsContext.Provider>
+        <RecipeCard />
+        {openModal && <ViewBox />}
+        {openCreateModal && <CreateBox />}
+        {openUpdateModal && <UpdateBox />}
+      </RecipeContext.Provider>
     </div>
   );
 }

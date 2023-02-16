@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const StyledCard = styled.div`
   width: 24%;
-  min-height: 65vh;
+  max-height: 65vh;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: 16px;
@@ -34,7 +34,6 @@ export const StyledCard = styled.div`
   img {
     width: 100%;
     height: 30vh;
-    border-radius: 16px 16px 0 0;
   }
 
   p {
@@ -87,6 +86,8 @@ export const StyledContainer = styled.div`
 
   h1 {
     text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: orange;
   }
 
   button {
@@ -152,6 +153,20 @@ export const StyledModal = styled.div`
   background-color: white;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 8px;
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    background-color: crimson;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+  }
 `;
 
 export const StyledOverlay = styled.div`
@@ -164,4 +179,23 @@ export const StyledOverlay = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgb(0, 0, 0, 0.8);
+`;
+
+export const StyledContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+
+  h1 {
+    font-family: sans-serif;
+  }
+
+  button {
+    background-color: transparent;
+    color: blue;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    font-family: 600;
+  }
 `;
