@@ -13,7 +13,6 @@ function CreateBox() {
   const { recipe, setRecipe, setOpenCreateModal } = useContext(RecipeContext);
   const StyledModal = styled.div`
     width: 45%;
-    height: 52vh;
     background-color: white;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     border-radius: 8px;
@@ -30,10 +29,12 @@ function CreateBox() {
       border-radius: 50%;
       border: none;
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     button {
-      background-color: lightblue;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 8px;

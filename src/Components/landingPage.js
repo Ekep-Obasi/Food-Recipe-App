@@ -9,18 +9,18 @@ import MenuBar from './menuBar';
 import CreateBox from './createModal';
 import UpdateBox from './updateModal';
 import ViewBox from './viewModal';
-import meals from '../data/meals';
 
-import useLocalStorage from '../hooks/useLocalStorage';
+import useSetLocalStorage from '../hooks/useSetLocalStorage';
 import RecipeContext from '../context';
 import RecipeCard from './RecipeCard';
+import useGetLocalStorage from '../hooks/useGetLocalStorage';
 
 function LandingPage() {
   const [openModal, setOpenModal] = useModal(false);
   const [openUpdateModal, setOpenUpdateModal] = useModal(false);
   const [viewIndex, setViewIndex] = useState(null);
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [recipe, setRecipe] = useState(meals);
+  const [recipe, setRecipe] = useState([]);
   const contextVals = {
     openModal,
     openUpdateModal,
@@ -33,7 +33,8 @@ function LandingPage() {
     viewIndex,
     setViewIndex,
   };
-  useLocalStorage(recipe);
+  useSetLocalStorage(recipe);
+  useGetLocalStorage();
 
   return (
     <div>

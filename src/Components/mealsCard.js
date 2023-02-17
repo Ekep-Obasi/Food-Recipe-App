@@ -59,6 +59,7 @@ function MealsCard({ index, id }) {
             id={id}
             onClick={(e) =>
               setOpenUpdateModal((prev) => {
+                setViewIndex(index);
                 return { ...prev, open: !prev.open, id: +e.target.id };
               })
             }
